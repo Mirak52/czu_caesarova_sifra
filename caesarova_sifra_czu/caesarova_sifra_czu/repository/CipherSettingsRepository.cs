@@ -12,12 +12,23 @@ namespace caesarova_sifra_czu.repository
     {
         public SQLiteAsyncConnection database;
 
-        public void CipherSettingsDatabase(string dbPath)
+        public CipherSettingsRepository(string dbPath)
         {
             database = new SQLiteAsyncConnection(dbPath);
             database.CreateTableAsync<CipherSettings>().Wait();
         }
-       
+        public Task<int> SaveItemAsync(CipherSettings item)
+        {
+            return database.InsertAsync(item);
+        }
 
+        public Task<List<CipherSettings>> SelectByName(string name)
+        {
+            return database.QueryAsync<CipherSettings>("select * FROM [CipherSettings] where name  = '" + name + "'");
+        }
+        public Task<List<CipherSettings>> Select()
+        {
+            return database.QueryAsync<CipherSettings>("select * FROM [CipherSettings]");
+        }
     }
 }
