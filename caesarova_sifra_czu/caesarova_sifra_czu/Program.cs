@@ -104,8 +104,8 @@ namespace caesarova_sifra_czu
                     cipher.cryptedText = Cipher.TextEncryption(cipher.text, cipherSettingsResult[0].index, true);
                     if (decision)
                     {
-                        Console.WriteLine("Soubor uložen zde: C:/Users/Public/Documents/šifra_" + DateTime.Now.ToString("dd-MM-yyyy_H-mm-ss")+".txt");
-                        File.WriteAllText(@"C:\Users\Public\Documents\šifra_"+DateTime.Now.ToString("dd-MM-yyyy_H-mm-ss") +".txt", cipher.cryptedText);
+                        Console.WriteLine("Soubor uložen zde:" + System.AppDomain.CurrentDomain.BaseDirectory  +DateTime.Now.ToString("dd-MM-yyyy_H-mm-ss") +".txt");
+                        File.WriteAllText(@System.AppDomain.CurrentDomain.BaseDirectory  +DateTime.Now.ToString("dd-MM-yyyy_H-mm-ss") +".txt", cipher.cryptedText);
                     }
                     else
                     {
