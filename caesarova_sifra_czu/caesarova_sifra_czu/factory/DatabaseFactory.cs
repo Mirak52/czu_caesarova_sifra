@@ -9,7 +9,7 @@ namespace caesarova_sifra_czu.factory
     public class DatabaseFactory
     {
         public static CipherSettingsRepository _Item;
-
+        //továrnička pro vytvoření souboru
         public static CipherSettingsRepository DatabaseCipherSettings
         {
             get

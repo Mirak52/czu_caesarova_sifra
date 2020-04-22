@@ -9,9 +9,12 @@ namespace caesarova_sifra_czu.classes
         public string text  { get; set; }
         public string cryptedText  { get; set; }
         public string path { get; set; }
+
+        //šifrování/dešifrování textu
         public static string TextEncryption(string text, int index, bool encryption = false)
         {
             char[] buffer = text.ToCharArray();
+            //zda se jedná o šifrování
             if (encryption)
             {
                 buffer = text.ToLower().ToCharArray();
@@ -22,6 +25,7 @@ namespace caesarova_sifra_czu.classes
                 char letter = buffer[i];
 
                 letter = ChechCzechLetter(letter);
+                //posunutí znaku o index
                 if (encryption)
                 {
                     letter = (char)(letter + index);
@@ -33,11 +37,11 @@ namespace caesarova_sifra_czu.classes
                    
                 }
                 
-                // Store.
                 buffer[i] = letter;
             }
             return new string(buffer);
         }
+        //Zbavení českých znaků
         private static char ChechCzechLetter(char letter)
         {
             switch (letter)
