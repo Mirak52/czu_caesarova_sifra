@@ -20,12 +20,15 @@ namespace caesarova_sifra_czu.classes
         public string hash { get; set; }
         public int index { get; set; }
 
+           //vytvoření nového záznamu v databázi
         public static void CreateNewSettings(CipherSettings cipherSettings)
         {
             cipherSettings.hash = CreateMd5Hash(cipherSettings.hashphrase);
             cipherSettings.index = CreateIndexByHash(cipherSettings.hash);
             DatabaseFactory.DatabaseCipherSettings.SaveItemAsync(cipherSettings);            
         }
+        //vytvoření indexu pro šifrování z hashe
+        //Ziskání čísel z hashe
 
         private static int CreateIndexByHash(string hash)
         {
@@ -46,8 +49,10 @@ namespace caesarova_sifra_czu.classes
             }
             if(index == 0)
             {
+                //V případě, že index je 0 zkusí to znovu
                 CreateIndexByHash(CreateMd5Hash(hash));
             }
+            //kontrola posunití indexu, aby byl v určitém rozsahu
             if ((index > 0 && index > 26) || (index < 0 && index < -26))
             {
                 int division = index / 26;
@@ -70,6 +75,7 @@ namespace caesarova_sifra_czu.classes
 
         private static string CreateMd5Hash(string hashphrase)
         {
+            //použítá funkce na vytvoření MD5 hashe, zdroj microsoft 
             using(MD5 md5Hash = MD5.Create())
             {
                 byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(hashphrase));
