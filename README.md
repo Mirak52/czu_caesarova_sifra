@@ -1,1 +1,3 @@
-# czu_caesarova_sifra
+# Caesarova šifra 
+
+Program pro tvorbu a ukládání uživatelů a následné vytváření Caesarovi šifry
